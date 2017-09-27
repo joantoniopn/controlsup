@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Pagina Inicial</title>
+	<link rel="stylesheet" type="text/css" href="tema/estilo.css">
+</head>
+<body>
+	<form action="enviar.php">
+		<h2>Instalação POS</h2>
+		<input type="date" id="dataInstalacao" hidden="true" /> <br>
+		<label>Cidade:</label>
+		<select id="cidade">
+			<option value="São Paulo">São Paulo</option>
+			<option value="Rio de Janeiro">Rio de Janeiro</option>
+			<option value="Rio Estado">Rio Estado</option>
+			<option value="Recife">Recife</option>
+			<option value="Ribeirão">Ribeirão</option>
+		</select> <br>
+		<label>Técnico:</label>
+		<select id="tecnico">
+			<option value="Emanuele">Emanuele</option>
+			<option value="Isaac">Isaac</option>
+			<option value="Dirceu">Dirceu</option>
+			<option value="Douglas">Douglas</option>
+			<option value="Odirlei">Odirlei</option>
+			<option value="Anderson">Anderson</option>
+			<option value="Marcos Andrade">Marcos Andrade</option>
+		</select><br>
+		<label>Loja:</label>
+		<input type="text" id="idLoja" placeholder="Loja:" /> <br>
+		<label>Term:</label>
+		<input type="text" id="term" placeholder="Terminal:" /> <br>
+		<label>Token:</label>
+		<input type="text" id="token" placeholder="Token:" /> <br>
+		<input class="cadastrar" type="submit" id="Cadastrar" value="Cadastrar">
+		<div id="mensagem"></div>
+	</form>
+
+</body>
+</html>
