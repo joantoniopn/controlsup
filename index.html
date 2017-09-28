@@ -6,11 +6,11 @@
 	<link rel="stylesheet" type="text/css" href="tema/estilo.css">
 </head>
 <body>
-	<form action="enviar.php">
+	<form action="enviar.php" method="post">
 		<h2>Instalação POS</h2>
 		<input type="date" id="dataInstalacao" hidden="true" /> <br>
 		<label>Cidade:</label>
-		<select id="cidade">
+		<select id="cidade" name="cidade">
 			<option value="São Paulo">São Paulo</option>
 			<option value="Rio de Janeiro">Rio de Janeiro</option>
 			<option value="Rio Estado">Rio Estado</option>
@@ -18,7 +18,7 @@
 			<option value="Ribeirão">Ribeirão</option>
 		</select> <br>
 		<label>Técnico:</label>
-		<select id="tecnico">
+		<select id="tecnico" name="tecnico">
 			<option value="Emanuele">Emanuele</option>
 			<option value="Isaac">Isaac</option>
 			<option value="Dirceu">Dirceu</option>
@@ -28,11 +28,11 @@
 			<option value="Marcos Andrade">Marcos Andrade</option>
 		</select><br>
 		<label>Loja:</label>
-		<input type="text" id="idLoja" placeholder="Loja:" /> <br>
+		<input type="text" id="idLoja" placeholder="Loja:" name="idLoja" /> <br>
 		<label>Term:</label>
-		<input type="text" id="term" placeholder="Terminal:" /> <br>
+		<input type="text" id="term" placeholder="Terminal:" name="term"/> <br>
 		<label>Token:</label>
-		<input type="text" id="token" placeholder="Token:" /> <br>
+		<input type="text" id="token" placeholder="Token:" name="token"/> <br>
 		<input class="cadastrar" type="submit" id="Cadastrar" value="Cadastrar">
 		<div id="mensagem"></div>
 	</form>
