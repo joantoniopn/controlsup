@@ -1,86 +1,174 @@
-<?php
-/*
-$colors = array("Preto", "Azul");
+    <!DOCTYPE html>
 
+    <html lang="en">
 
-for($i=0; $i < count($colors); $i++){
-	echo $colors[$i]."<br>";
-}
+    <head>
 
-$cores = array("azul", "amarelo", "verde", "vermelho");
-foreach ($cores as $cor) {
-    echo "$cor<br>";
-}
-*/
+        <meta charset="UTF-8">
 
+        <title>Dashboard</title>
 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
 
-// Array valores
-$instalacao = array();
-//Array colunas
-$colunas = array();
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-$term = 111;
-$data = "20/10/2017";
-$nome = "Joao Neto";
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
 
-$coluna1 = "terminal";
-$coluna2 = "data_transaction";
-$coluna3 = "nome";
+        <style type="text/css">
 
-array_push($instalacao, $term, $data, $nome);
-$contador = count($instalacao);
+            .wrapper{
 
-array_push($colunas, $coluna1, $coluna2, $coluna3);
-$contador = count($colunas);
+                width: 650px;
 
-echo "INSERT INTO (";
-foreach ($colunas as $indice => $dados) {
-		echo $dados;
-		if($indice < $contador-1)
-			echo ", ";
-}
-echo ")";
+                margin: 0 auto;
 
-echo " VALUES (";
-foreach ($instalacao as $indice => $dados) {
-		echo $dados;
-		if($indice < $contador-1)
-			echo ", ";
-}
-echo ")";
+            }
 
+            .page-header h2{
 
+                margin-top: 0;
 
-//Array Key
+            }
 
-$dados = array();
-$colums = array();
+            table tr td:last-child a{
 
+                margin-right: 15px;
 
-function array_keys_prefix($arr, $pref = "") {
-    $rarr = array();
-    foreach ($arr as $key => $val) {
-        $rarr[$pref.$key] = $val;
-    }
-    return $rarr;
-}
+            }
 
-function array_keys_prefix_multi($arr, $pref = "") {
-    $rarr = array();
-    foreach ($arr as $key => $val) {
-        $rarr[] = array_keys_prefix($val, $pref);
-    }
-    return $rarr;
-}
+        </style>
 
-// $a = array("foo" => "FOO", "bar" => "BAR", "baz" => "BAZ"); // or
-$a = array("foo" => "FOO", "bar" => "BAR", "baz" => array(1,2,3));
-print_r(array_keys_prefix($a, "my_"));
+        <script type="text/javascript">
 
-// db fetch...
-$products = array(
-    array("id" => 1, "name" => "Foo"),
-    array("id" => 2, "name" => "Bar")
-);
-print_r(array_keys_prefix_multi($products, "product_"));
+            $(document).ready(function(){
+
+                $('[data-toggle="tooltip"]').tooltip();   
+
+            });
+
+        </script>
+
+    </head>
+
+    <body>
+
+        <div class="wrapper">
+
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <div class="page-header clearfix">
+
+                            <h2 class="pull-left">Employees Details</h2>
+
+                            <a href="create.php" class="btn btn-success pull-right">Add New Employee</a>
+
+                        </div>
+
+                        <?php
+
+                        // Include config file
+
+                        require_once 'config.php';
+
+                        
+
+                        // Attempt select query execution
+
+                        $sql = "SELECT * FROM employees";
+
+                        if($result = $pdo->query($sql)){
+
+                            if($result->rowCount() > 0){
+
+                                echo "<table class='table table-bordered table-striped'>";
+
+                                    echo "<thead>";
+
+                                        echo "<tr>";
+
+                                            echo "<th>#</th>";
+
+                                            echo "<th>Name</th>";
+
+                                            echo "<th>1º Telefone</th>";
+
+                                            echo "<th>2º Telefone</th>";
+
+                                            echo "<th>Action</th>";
+
+                                        echo "</tr>";
+
+                                    echo "</thead>";
+
+                                    echo "<tbody>";
+
+                                    while($row = $result->fetch()){
+
+                                        echo "<tr>";
+
+                                            echo "<td>" . $row['id'] . "</td>";
+
+                                            echo "<td>" . $row['name'] . "</td>";
+
+                                            echo "<td>" . $row['tel1'] . "</td>";
+
+                                            echo "<td>" . $row['tel2'] . "</td>";
+
+                                            echo "<td>";
+
+                                                echo "<a href='read.php?id=". $row['id'] ."' title='View Record' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
+
+                                                echo "<a href='update.php?id=". $row['id'] ."' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
+
+                                                echo "<a href='delete.php?id=". $row['id'] ."' title='Delete Record' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
+
+                                            echo "</td>";
+
+                                        echo "</tr>";
+
+                                    }
+
+                                    echo "</tbody>";                            
+
+                                echo "</table>";
+
+                                // Free result set
+
+                                unset($result);
+
+                            } else{
+
+                                echo "<p class='lead'><em>No records were found.</em></p>";
+
+                            }
+
+                        } else{
+
+                            echo "ERROR: Could not able to execute $sql. " . $mysqli->error;
+
+                        }
+
+                        
+
+                        // Close connection
+
+                        unset($pdo);
+
+                        ?>
+
+                    </div>
+
+                </div>        
+
+            </div>
+
+        </div>
+
+    </body>
+
+    </html>
+
